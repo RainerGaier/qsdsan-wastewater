@@ -314,6 +314,78 @@ University of Illinois/NCSA Open Source License - see [LICENSE.txt](LICENSE.txt)
 
 This is a derivative work based on [QSDsan](https://github.com/QSD-Group/QSDsan), licensed under the same terms.
 
+## Fork Extensions (RainerGaier/qsdsan-wastewater)
+
+This repository is a fork of [puran-water/qsdsan-engine-mcp](https://github.com/puran-water/qsdsan-engine-mcp) with additional features for workflow automation and cloud integration.
+
+### n8n Workflow Automation
+
+Located in `n8n/n8n-qsd-test/`, this fork includes complete n8n workflow automation:
+
+| Workflow | Version | Description |
+|----------|---------|-------------|
+| `qsdsan-simulation-v8.json` | v8.0 | Hierarchical Supabase storage, server-side AI analysis |
+| `qsdsan-simulation-v9.json` | v9.0 | Dynamic JSON input, study management, webhook triggers |
+
+**v9 Features:**
+- **Study Mode**: Fetch predefined study configurations from Supabase
+- **Direct Mode**: Pass full JSON simulation configuration via webhook
+- **Legacy Mode**: Backward compatible with v8 flat parameter format
+- **Overrides**: Customize any parameter in any input mode
+- **Webhook Trigger**: External system integration via `POST /webhook/qsdsan-simulate`
+
+**Test Scripts:**
+- `webhook-test-examples.ps1` - PowerShell interactive test script
+- `webhook-test-examples.sh` - Bash/curl interactive test script
+- `webhook-payloads.json` - JSON payload examples for Postman/Insomnia
+
+### Supabase Integration
+
+Simulation results are automatically uploaded to Supabase Storage with hierarchical folder structure:
+
+```
+{session_id}/{analysis_type}/
+├── {session_id}-{template}.pdf      # PDF report (via Gotenberg)
+├── {session_id}-{template}.csv      # Summary data
+├── {session_id}-{template}.json     # Full results with AI analysis
+└── {session_id}-AI_Analysis.md      # AI expert analysis markdown
+```
+
+**Studies Table:** Predefined study configurations stored in Supabase `studies` table:
+- 2 templates (aerobic MBR, anaerobic CSTR)
+- 7 food & beverage industry studies (dairy, brewery, winery, soft drink, meat processing, fruit/vegetable)
+
+See `n8n/data/default-studies.sql` for the study definitions.
+
+### Server-Side AI Analysis
+
+The workflow calls `/api/analyze_results` endpoint for AI-powered analysis:
+- OpenAI API key stored securely on server (not exposed in workflow)
+- Configurable model selection (default: gpt-4o)
+- Optional custom prompts via `override_prompt` parameter
+
+### Cloud Deployment
+
+Additional cloud deployment features:
+- Docker support (`Dockerfile`, `docker-compose.yaml`)
+- GCP Cloud Run deployment (`deploy-gcp.ps1`)
+- Environment-aware configuration (local/Docker/Cloud Run)
+- GCS storage backend for cloud deployments
+
+See `docs/CLOUD_DEPLOYMENT.md` for deployment instructions.
+
+### Documentation
+
+Fork-specific documentation in `docs/completed-plans/`:
+- `phase-n8n-1-dynamic-json-input.md` - v9 workflow implementation
+- `phase-n8n-2-supabase-folder-structure.md` - Hierarchical storage
+- `phase-n8n-3-study-configuration-management.md` - Study management
+- `phase-env-1-cloud-deployment-integration.md` - Cloud deployment
+
+---
+
 ## Acknowledgments
 
 Built on [QSDsan](https://github.com/QSD-Group/QSDsan) by the Quantitative Sustainable Design Group.
+
+Original MCP engine by [puran-water/qsdsan-engine-mcp](https://github.com/puran-water/qsdsan-engine-mcp).
