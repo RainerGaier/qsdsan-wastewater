@@ -295,7 +295,7 @@ function Show-Menu {
     Write-Host "10. Direct Mode - High-Strength Industrial"
     Write-Host ""
     Write-Host "T. Toggle between Test/Production URL"
-    Write-Host "Q. Quit"
+    Write-Host "99. Quit"
     Write-Host ""
 }
 
@@ -326,7 +326,7 @@ function Run-Interactive {
                     Write-Host "Switched to Test URL: $script:BaseUrl" -ForegroundColor Yellow
                 }
             }
-            "Q" { $running = $false }
+            "99" { $running = $false }
             default { Write-Host "Invalid choice" -ForegroundColor Red }
         }
     }

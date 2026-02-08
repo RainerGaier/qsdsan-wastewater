@@ -2,7 +2,7 @@
 title: "Aerobic MBR Process Report"
 subtitle: "ASM2d Simulation Results"
 date: "{{ meta.report_date }}"
-template: "{{ meta.template_name }}"
+simulation-template: "{{ meta.template_name }}"
 model: "ASM2d"
 format:
   html:

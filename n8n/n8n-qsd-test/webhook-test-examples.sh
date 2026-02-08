@@ -265,7 +265,7 @@ show_menu() {
     echo ""
     echo "  OPTIONS:"
     echo "    t. Toggle Test/Production URL"
-    echo "    q. Quit"
+    echo "    99. Quit"
     echo ""
 }
 
@@ -299,7 +299,7 @@ while true; do
         9) example9 ;;
         10) example10 ;;
         t|T) toggle_url ;;
-        q|Q) echo "Goodbye!"; exit 0 ;;
+        99) echo "Goodbye!"; exit 0 ;;
         *) echo -e "${RED}Invalid choice${NC}" ;;
     esac
 

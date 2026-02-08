@@ -1077,7 +1077,7 @@ def _build_anaerobic_legacy(result: Dict[str, Any]) -> str:
     return f"""---
 title: "Anaerobic Digester Simulation - {flow:.0f} m³/d"
 date: {datetime.now().strftime("%Y-%m-%d")}
-template: {template}
+simulation-template: {template}
 model: mADM1
 flow_m3_d: {flow}
 tags: [qsdsan, anaerobic, mADM1, simulation]
@@ -1134,7 +1134,7 @@ def _build_aerobic_legacy(result: Dict[str, Any]) -> str:
     return f"""---
 title: "Aerobic MBR Simulation - {flow:.0f} m³/d"
 date: {datetime.now().strftime("%Y-%m-%d")}
-template: {template}
+simulation-template: {template}
 model: ASM2d
 flow_m3_d: {flow}
 tags: [qsdsan, aerobic, ASM2d, MBR, simulation]
